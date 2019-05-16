@@ -9,11 +9,11 @@ This procedure for Linux.
 
   sudo apt install python3-pip
 
-- install flask
+- install Flask
 
   sudo apt install python3-flask
 
-- check is the faslk is well installed 
+- check is the Flask is well installed 
   
   python3
   import flask from Flask
