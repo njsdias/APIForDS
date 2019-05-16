@@ -11,7 +11,7 @@ This procedure for Linux.
 
 - install flask
 
-  pip3 install flask
+  sudo apt install python3-flask
 
 - check is the faslk is well installed 
   
