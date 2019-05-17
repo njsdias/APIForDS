@@ -88,10 +88,13 @@ This is the output of the first exmaple of JSON files
 
 **Install Postman**
 
-sudo wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
-sudo tar -xzf postman.tar.gz -C /opt
-sudo rm postman.tar.gz
-sudo ln -s /opt/Postman/Postman /usr/bin/postman
+- sudo wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
+
+- sudo tar -xzf postman.tar.gz -C /opt
+
+- sudo rm postman.tar.gz
+
+- sudo ln -s /opt/Postman/Postman /usr/bin/postman
 
 - run postman type in terminal: postman
 
