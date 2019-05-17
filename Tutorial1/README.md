@@ -86,3 +86,13 @@ This is the output of the first exmaple of JSON files
 
 ![json_example](https://user-images.githubusercontent.com/37953610/57933258-b2c1c300-78b4-11e9-9275-0772e6e6c225.png)
 
+**Install Postman**
+
+sudo wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
+sudo tar -xzf postman.tar.gz -C /opt
+sudo rm postman.tar.gz
+sudo ln -s /opt/Postman/Postman /usr/bin/postman
+
+- run postman type in terminal: postman
+
+
