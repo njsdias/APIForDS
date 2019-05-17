@@ -1,3 +1,12 @@
+### Information of the Files
+
+- add.py: it is the basics of the api with the JSON file that is used to send information between server/servers
+
+- add2.py: it contains a basic API that do the four elementary math operations: add, subtraction, multiply and divided. In this file the important we two important things:
+    - how we can send error messages to guide the user
+    - how we can pass a value to the API
+
+
 ### Important Notes
 
 When we access to a normal page 
