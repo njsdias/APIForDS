@@ -21,3 +21,8 @@ This procedure for Linux.
 - install Flask-resful to do API
 
   sudo apt install python3-flask
+  
+- check is the Flask is well installed 
+  
+  python3
+  import flask_restful as fr
