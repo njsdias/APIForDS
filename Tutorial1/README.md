@@ -66,19 +66,23 @@ When we send arrays of objects we can send a array with objects that contais oth
            
            "name": "Olchenback"
       
-          }
+          } #End first object of first nested array
           
-       ]
+       ] # End first nested array
     
-    }
+    } # End the objects inside array of nested arrays
    
     
     
-  ]
-   
+  ] #End array Nested array
+     
   
-  ]
-  
-  
-  
-}
+} #end JSON FILE
+
+
+**Array of nested arrays**
+
+This is the output of the first exmaple of JSON files
+
+![json_example](https://user-images.githubusercontent.com/37953610/57933258-b2c1c300-78b4-11e9-9275-0772e6e6c225.png)
+
