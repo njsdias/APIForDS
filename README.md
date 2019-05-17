@@ -17,3 +17,7 @@ This procedure for Linux.
   
   python3
   import flask from Flask
+  
+- install Flask-resful to do API
+
+  sudo apt install python3-flask
