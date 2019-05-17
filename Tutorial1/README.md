@@ -1,19 +1,47 @@
-### APIForDS
-This repository is a course which scope is: Python REST APIs with Flask, Docker, MongoDB, and AWS DevOps.
+### Important Notes
 
-### 1. Installation
+When we access to a normal page 
 
-This procedure for Linux.
+- The Browser sends the request to the google.com and the google.com sends a response back whcih is the index.html that is the google structure.
 
-- install python 3
+- Browsers only communicate using only text. all communication between server/servers or server/browser all communication on internt can only be done only with text (even when we send a image or video it is a text). Because the internet is based in the protocol TCP thats only support text
 
-  sudo apt install python3-pip
+When we send a image the information that is send is text that are numbers that represent RGB for each pixel which is in the image.
 
-- install Flask
+- JSON is one format that is used to send organize texts between server/servers or server/browser
 
-  sudo apt install python3-flask
+This is a simple strucute of JSON file (file-> value). The last line dont have commma
+{
+  "field1": "abc",
+  "field2": "def",
+  "field3": 4,
+  "array": [1,2,3,4, "abc"],
+  "array of objects"
+}
 
-- check is the Flask is well installed 
+When we send arrays of objects we can send a array with objects that contais other objects, that is another JSON:
+
+- array [objects(objects)]
+
+{
+
+  "field1": "abc",
   
-  python3
-  import flask from Flask
+  "field2": "def",
+  
+  "field3": 4,
+  
+  "array": [1,2,3,4, "abc"],
+  
+  "array of objects":[
+    
+    {
+      "field1_of object_1": 1
+    },
+    
+    {
+      "field1_of object_2": 2
+    }
+    
+  ]
+}
