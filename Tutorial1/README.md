@@ -112,4 +112,29 @@ This is the output of the first exmaple of JSON files
 ![error_chart](https://user-images.githubusercontent.com/37953610/57983413-7d021300-7a49-11e9-918b-2748b2c2929b.png)
 
 
+## Docker Container
+- Scenario 1
+
+Imagine that the Developer 1, uploaded your code which was developed in your local manchine. This code was using the Environnment 1. So, a Developer 2 download this code to your local machine and when use it your own envinronment to run the code that was downloaded he gets a bunch of errors. It happens because the two envinronments have different libraries and configurations. 
+
+- Scenario 2
+Imagine that after the two developers fixed all errors and posted it to the server that was buyed to run the code in production. The server have different environment and IDE from the two different developers and the code crashs in production.
+
+**Solution**
+
+- 1: Virtualization: It is a Virtual machine installed in your local computer that is a replica of the envinronment of the Server to guarantee thaht the code developed in your local machine is able to run in virtual machine installed and because for that guarantee that the same code will ruin in the server too. This solution have many abstaraction and the things are really slow when you put the code run in your virtual amchine because have only a few resources (memory, hd, etc).
+
+![virtualization](https://user-images.githubusercontent.com/37953610/57986171-6ec3ef00-7a69-11e9-8d05-a3ac16819c49.png)
+
+
+- 2: Docker (Linux container): The Docker Engine exists in your Operator System (OS).  The Docker Engine can hosts multiple applications (APP1... APPn). Each application have your own OS, code, environment and IDE. The Docker Engine translate the Application for your OS for theat application can run in your OS without any problem. Here, in this situation, Application is understood as a Container because a container can be anything . A container is made by a image. For example, a image can be a text file describes all proprieties of the environment that application should run (Ubuntu 16.0.4; Python 3; code developed; etc..). When your code is already to deploy to the Server, you need to install Docker Engine in the Server.After that you only need put the Image of the container in the Server and run it. And Docker guarantees that your code that runs in the image will run in the Server because the docker engine will translate the image to the server. It is the amin function of a docker contianer. 
+
+![docker_explained](https://user-images.githubusercontent.com/37953610/57986410-789b2180-7a6c-11e9-888d-e576500c3d03.png)
+
+
+
+
+
+
+
 
