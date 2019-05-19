@@ -140,7 +140,31 @@ Search in google for: download docker ubuntu and click in the site: Get Docker C
 Once in the site goes to:Install using the repository and follows the instructions that are described there.
 
 
+- sudo apt-get update
 
+- sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+    
+ - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ 
+ - sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+   
+ - sudo apt-get update
+   
+ - sudo apt-get install docker-ce docker-ce-cli containerd.io
+   
+ - sudo docker run hello-world
+   
+ - Successfull Instalation
+   
+   ![docker_install](https://user-images.githubusercontent.com/37953610/57986717-7f2b9800-7a70-11e9-83cf-088e0264aa5a.png)
 
 https://docs.docker.com/compose/install
 
