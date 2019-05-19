@@ -107,4 +107,9 @@ This is the output of the first exmaple of JSON files
 
 - run postman type in terminal: postman
 
+## Error chart for app2.py
+
+![error_chart](https://user-images.githubusercontent.com/37953610/57983413-7d021300-7a49-11e9-918b-2748b2c2929b.png)
+
+
 
