@@ -131,6 +131,19 @@ Imagine that after the two developers fixed all errors and posted it to the serv
 
 ![docker_explained](https://user-images.githubusercontent.com/37953610/57986410-789b2180-7a6c-11e9-888d-e576500c3d03.png)
 
+## Docker Compose
+
+Is a application to controle a docker that have a multiple containers. When have a need to comunicate between dockers the Docker compose can helps in that communication using a yaml file. 
+
+Search in google for: download docker ubuntu and click in the site: Get Docker CE for Ubuntu
+
+Once in the site goes to:Install using the repository and follows the instructions that are described there.
+
+
+
+
+https://docs.docker.com/compose/install
+
 
 
 
