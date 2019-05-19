@@ -166,9 +166,19 @@ Once in the site goes to:Install using the repository and follows the instructio
    
    ![docker_install](https://user-images.githubusercontent.com/37953610/57986717-7f2b9800-7a70-11e9-83cf-088e0264aa5a.png)
 
-https://docs.docker.com/compose/install
+**Download and Install Docker Compose**
 
+- Go to the website: https://docs.docker.com/compose/install
 
+- Run the next commands:
+
+    - sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+    - sudo chmod +x /usr/local/bin/docker-compose
+    
+    - docker-compose --version
+    
+![docker_compose](https://user-images.githubusercontent.com/37953610/57986824-a9318a00-7a71-11e9-9ed1-c948338f1e78.png)
 
 
 
