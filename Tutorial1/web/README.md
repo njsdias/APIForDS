@@ -25,7 +25,7 @@ Open the DockerFile and fill with the next lines (without the comments after ->)
 
 - COPY . . -> Copy all files of the current directory (local) first dot(.) to the machine, the second dot(.) means into the machine (container)
 
--CMD ["python", "app.py"] -> to run in the machine the app.py using python
+- CMD ["python", "app.py"] -> to run in the machine the app.py using python
                    
 ## requirements.txt
 This file ontains the programs or libraries taht you need to run your application. For our case fill the file as
@@ -34,3 +34,8 @@ This file ontains the programs or libraries taht you need to run your applicatio
 - flask_restful
 
 That tells to pip to install this two libraries.
+
+## Docker- Compose
+Now we need to do something to automatically start this application. First we to jump to the main directory (Tutorial1) and create the docker-compose that contains all containers (imagine you have many containers: web,db,npl, etc.). The docker-compose controls this containers
+
+- to create the yml file -> touch docker-compose.yml
