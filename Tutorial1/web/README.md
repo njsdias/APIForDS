@@ -49,3 +49,20 @@ The version:'3' specify the version of the docker-compose. The next lines says t
             build: ./web
             ports:
               - "5000":"5000"
+         
+## Run the Docker
+In the main folder (Tutorial1):
+
+- sudo docker-compose build -> It builds the entire system. 
+
+- sudo docker-compose up -> To put the envinronment in the production in web
+
+In the postman we can run the application selecting the POST and, for instance, localhost:5000/division to test if is all right.
+
+Imagine we modify your file app.py. To test the changes you only need run:
+
+- sudo docker-compose up
+
+The command build is necessary run if you change anything on the docker files.
+
+
