@@ -39,3 +39,13 @@ That tells to pip to install this two libraries.
 Now we need to do something to automatically start this application. First we to jump to the main directory (Tutorial1) and create the docker-compose that contains all containers (imagine you have many containers: web,db,npl, etc.). The docker-compose controls this containers
 
 - to create the yml file -> touch docker-compose.yml
+
+The version:'3' specify the version of the docker-compose. The next lines says that: the web is a service and for build it use the folder ./web where is located the DockerFile
+
+        version: '3'
+        
+        services:
+          web:
+            build: ./web
+            ports:
+              - "5000":"5000"
