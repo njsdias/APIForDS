@@ -6,7 +6,7 @@ Here we are build a MongoDB database to store how many times the user requires a
 
 ## MongoDB
 
-The next table mkes the correlations among a Relational DB with a MongoDB. For instance we can see that in a **RBMS** a **Table** is compound by **Rows** and **Colunms**. But in a **MondoDB** a table is a Collection. In MondoDB, **Collections** is compounded by **Documents** and **Fields**. 
+The next table mkes the correlations among a Relational DB with a MongoDB. For instance we can see that in a **RBMS** a **Table** is compound by **Rows** and **Colunms**. But in a **MondoDB** a table is a Collection. In MondoDB, **Collections** is compounded by **Documents** and **Fields**. sdfsfsd
 
 ![RDMS_MongoDB](https://user-images.githubusercontent.com/37953610/58112126-be7df400-7bea-11e9-9da1-8efb24a95417.png)
 
