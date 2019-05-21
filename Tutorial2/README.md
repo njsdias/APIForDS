@@ -1,28 +1,9 @@
-### APIForDS
-This repository is a course which scope is: Python REST APIs with Flask, Docker, MongoDB, and AWS DevOps.
+### Objective
 
-### 1. Installation
+The main objective is improve the app.py build to do the four elementary operations: add, subtraction, division, multiplication.
 
-This procedure for Linux.
+Here we are build a MongoDB database to store how many times the user requires an operation. If the same user have more than five requirements the app blocks the access. In other words, an user have a limite of five requirements. For that the user can provide the UserName(User) and the PassWord(PW) to the app controls how many times the app was required by user. This information will be stored in a MongoDB databse.
 
-- install python 3
 
-  sudo apt install python3-pip
 
-- install Flask
 
-  sudo apt install python3-flask
-
-- check is the Flask is well installed 
-  
-  python3
-  import flask from Flask
-  
-- install Flask-resful to do API
-
-  sudo apt install python3-flask
-  
-- check is the Flask is well installed 
-  
-  python3
-  import flask_restful as fr
