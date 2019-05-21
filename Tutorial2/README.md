@@ -53,3 +53,39 @@ In general, in a Relational DB we have a schema that shows a number of tables an
    4 - User Data management
    
    5 - Data Hub
+   
+**Install MongoDb on Ubuntu 18.04 LTS**
+   
+Go to site and follow the instructions:
+
+   https://websiteforstudents.com/install-mongodb-on-ubuntu-18-04-lts-beta-server/
+   
+Or simple copy and past in your terminal the next set of commands:
+
+  1 - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+  
+  2 - echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+  
+  3 - sudo apt update
+  
+  4 - sudo apt install -y mongodb-org 
+  
+  5- Run one of the next commands in according with your objective
+  
+    - sudo systemctl stop mongod.service
+    - sudo systemctl start mongod.service   (for start MongoBD)
+    - sudo systemctl enable mongod.service
+   
+ 6 - sudo systemctl status mongod    (to see the status)
+ 
+ ![mongoinst-1](https://user-images.githubusercontent.com/37953610/58115754-ac07b880-7bf2-11e9-963a-6aeed7847b02.png)
+ 
+ 7- To run MongoDB type in terminal only: mongo
+ 
+ 8 - To see the options: db.help()
+ 
+ 9 - To see the status:  db.status()
+ 
+ 10- To see the version of MongoDB: db.version()
+ 
+ ![version_mongoDB](https://user-images.githubusercontent.com/37953610/58115875-e8d3af80-7bf2-11e9-93d3-d192c01f2ee7.png)
