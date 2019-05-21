@@ -89,3 +89,27 @@ Or simple copy and past in your terminal the next set of commands:
  10- To see the version of MongoDB: db.version()
  
  ![version_mongoDB](https://user-images.githubusercontent.com/37953610/58115875-e8d3af80-7bf2-11e9-93d3-d192c01f2ee7.png)
+ 
+ ## Representation of the same problem in Relational DB and in a MongoDB
+ 
+ **Problem Definition**
+ 
+ Suppose a client needs a database design for his blof/website and see the differences between RDBMS and MongoDB schema design. Website has the following requirements:
+ 
+ - Every post has the unique title, description and url
+ 
+ - Every post can have one or more tags
+ 
+ - Every post has the name of its publisher and total number of likes
+ 
+ - Every post has comments given by users along with their name, message, data-time and likes
+ 
+ - On each post, there can be zero or more comments.
+ 
+ **Relation Database**
+ 
+ ![RDB-Prob1](https://user-images.githubusercontent.com/37953610/58119602-45d36380-7bfb-11e9-81c5-432cc81c9174.png)
+ 
+ **Mongo DB**
+ 
+ ![Mongo-Prob1](https://user-images.githubusercontent.com/37953610/58119629-4ff56200-7bfb-11e9-90f4-af7c3ecc9232.png)
