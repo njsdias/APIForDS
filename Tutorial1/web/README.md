@@ -1,6 +1,6 @@
 ## Dockers
 
-Once that you copy your aapp.py the Docker expects to see a DockerFile
+Once that you copy your aapp.py the Docker expects to see a Dockerfile
 
 - To create a DockerFile. In terminal write : touch Dockerfile
 
@@ -9,10 +9,10 @@ After that we nee to tell to Docker which applications that is necessary to run 
 - touch requirements.txt
 
 
-## DockerFile
-The DockerFile have the instructions to build a machine from scratch.
+## Dockerfile
+The Dockerfile have the instructions to build a machine from scratch.
 
-Open the DockerFile and fill with the next lines (without the comments after ->)
+Open the Dockerfile and fill with the next lines (without the comments after ->)
 
 - FROM python:3 -> This pull pyhton 3 from https://hub.docker.com/_/pyhton/ that is like a a repository for dockers
                    The truth is that pulls the Ubuntu too to run the python3 in the container.
@@ -48,7 +48,7 @@ The version:'3' specify the version of the docker-compose. The next lines says t
           web:
             build: ./web
             ports:
-              - "5000":"5000"
+              - "5000:5000"
          
 ## Run the Docker
 In the main folder (Tutorial1):
