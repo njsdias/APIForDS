@@ -113,3 +113,25 @@ Or simple copy and past in your terminal the next set of commands:
  **Mongo DB**
  
  ![Mongo-Prob1](https://user-images.githubusercontent.com/37953610/58119629-4ff56200-7bfb-11e9-90f4-af7c3ecc9232.png)
+ 
+ ## First Commands in MongoDB
+ 
+ - _use nameDB_ : Create an non-existence DB or use a existent DB
+ 
+ - _db_ : To check your currently selected database
+ 
+ - _show dbs_ : To check your databases list
+ 
+ **Note:** Your db created only appears on the list after you insert at lesat one document into your created db:
+ 
+      db.movie.insert({"name":"tutorial"})
+
+After you insert a document use _show dbs_ command to see your db in the list. 
+
+**Attention:** As default the MongoDB creates a db named as test. If you didn't create any databse, then collections will be stored in the test database. 
+
+  - _db.dropDatabase()_ : To drop a exisiting database. If you have not selected any database, then it will delete default 'test' database.
+  
+        use mydb                # use the DatabSe mydb
+        db.dropDatabase()       # drop the Dtabase mydb
+        show dbs                # check if the Database was dropped 
