@@ -1,3 +1,12 @@
+## File Information 
+
+- appV1: build an application to do the four elementary opperations: add, subtraction, division, multiply 
+
+- appV2: connect application to mongoDB server
+
+- appV3
+
+
 ## Dockers
 
 Once that you copy your aapp.py the Docker expects to see a Dockerfile
