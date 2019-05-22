@@ -7,7 +7,7 @@
     - how we can pass a value to the API
 
 - appV2: it shows how connect the app to mongoDb server 
-          [readmeV2](APIFORDS/Tutorial2/README.md)
+          [readmeV2](https://github.com/njsdias/APIForDS/tree/master/Tutorial2/README.md)
 
 - appV3
 
