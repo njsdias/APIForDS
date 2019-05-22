@@ -10,7 +10,7 @@ Second open the terminal and inside of _db_ folder run the command:
 
 Using atom to edit the Dockerfile we need to specifiy the mongodb image. For that type:
   
-    FROM mongo: 3.6.12
+    FROM mongo:3.6.12
 
 Now we need to define our _db_ service in _docker-compose.yml_ file as we did before for _web_ service
 
