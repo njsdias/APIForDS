@@ -308,3 +308,66 @@ In _find()_ method, if you pass multiple keys by separating them by ',' then Mon
             }
            ]
           }).pretty()
+
+## 4. Updating Documents in MongoDB
+
+- _update()_ : it updates values in the existing document 
+
+      db.CollectionName.update(SelectionCriteria,UpdatedData)
+      
+      db.mycol.update( 
+        {
+        "title":"MongoDb Overview"
+        },
+        {
+        $set: {"title":"New Mongo DB Tutorial"}
+        }
+      )
+   
+ **Note:** To update multiple documents, you need toset a parameter 'multi' to true.
+ 
+      db.mycol.update( 
+        {
+        "title":"MongoDb Overview"
+        },
+        {
+        $set: {"title":"New Mongo DB Tutorial"}
+        },
+        {multi:true}
+      )
+
+- _save()_ : it replaces the existing document with the document passed in saved() method
+
+- _remove() : to delete a document
+
+      db.CollectionName.remove(DelletionCritteria)
+
+      db.mycol.remove({
+        "title":"MongoDb Overview"
+      })
+
+## Projection
+
+In MongoDB, projection means selecting only the encessary data rather than selecting sholeof the data of a document. If a document has 5 fields and you need to show only 3, then select only 3 fields from them.
+
+MongoDB's _find()_ method, explained before accpets second optional parameter that is kist of fields that you want to retrieve. In MongoDB, when tou execue _find()_ method, then it displays all fields of a document. To limit this, you need to set a list of fields with value 1 or 0, 1 is used to show the field while 0 is used to hide the fields.
+
+    # This only return the titles(show=1) and not the _id (hidden=0)
+    db.mycol.find({},{"title":1,_id:0})
+    
+## Limiting Records
+
+This is used to limit the records displayed by the _find()_ command.
+
+    db.CollectionName.find().limit(Number)
+    
+    db.mycol.find({},{"title":1,_id:0}).limit(1)   # shows only one document
+    
+## Sorting Documents
+
+The _sort()_ method accpets a document containig a list of fields along with their soring order. To specify sorting order 1(ascending order) and -1(descending order) are used. 
+
+    db.CollectionName.find().sort({KEY:1})
+    
+    db.mycol.find().sort({"likes":1})
+    
