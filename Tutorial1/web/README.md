@@ -8,7 +8,9 @@
 
 - appV2: it shows how connect the app to mongoDb server 
 
-  Bellow you have a readme to [Mongo Basics](https://github.com/njsdias/APIForDS/blob/master/Tutorial1/web/mongobasics.md)
+    - Readme to [Mongo Basics](https://github.com/njsdias/APIForDS/blob/master/Tutorial1/web/mongobasics.md)
+
+    - readme to [Modification to connect mongoDb with the application](https://github.com/njsdias/APIForDS/blob/master/Tutorial1/web/appV2.md)
 
 - appV3
 
