@@ -227,3 +227,84 @@ Some of datatypes supported by MongoDB:
   - code : it is to store JavaScript code into the document
   
   - regular expression : it is used to store regular expression
+ 
+ ## Query Documents
+ 
+ - _find()_ 
+ 
+        # it will display all documents in a non-structured way
+        db.CollectionName.find({})         # display all documents
+        
+        # it will display in a formatted way
+        db.CollectionName.pretty({})       # display all documents  
+        
+  - _findOne()_ : that returns only one document
+  
+  **1. Filters**
+  
+ - Equality: 
+  
+        db.mycol.find({
+          "title":"MongoDB Overview"
+        }).pretty()
+  
+ - Less Than:
+  
+        db.mycol.find({
+          "likes":{$lt:50}
+        }).pretty()
+  
+ - Less Than Equals:
+  
+        db.mycol.find({
+          "likes":{$lte:50}
+        }).pretty()
+        
+ - Greater Than: 
+  
+        db.mycol.find({
+          "likes":{$gt:50}
+        }).pretty()
+               
+- Greater Than Equals: 
+  
+        db.mycol.find({
+          "likes":{$gte:50}
+        }).pretty()
+        
+                
+- Not Equals:  
+  
+        db.mycol.find({
+          "likes":{$ne:50}
+        }).pretty()
+        
+**2. AND in MongoDB**
+
+In _find()_ method, if you pass multiple keys by separating them by ',' then MongoDB treats it as AND condition.
+
+        db.mycol.find({
+          $and:[
+            {
+              "likes":{$gte:50}
+            },
+            {
+              "title":"MongoDB Overview"
+            }
+          ]
+        }).pretty()
+ 
+ **2. OR in MongoDB**
+ 
+ You need to use _$or_ keyword.
+ 
+         db.mycol.find({
+          $or:[
+            {
+              "likes":{$gte:50}
+            },
+            {
+              "title":"MongoDB Overview"
+            }
+          ]
+        }).pretty()
