@@ -1,4 +1,4 @@
-### Information of the Files
+## Information of the Files
 
 - add.py: it is the basics of the api with the JSON file that is used to send information between server/servers
 
@@ -6,8 +6,18 @@
     - how we can send error messages to guide the user
     - how we can pass a value to the API
 
+## Structure of folders
+        docker-compose.yml
+        |-web
+            app.py
+            Dockerfile
+            requirements.txt
+        |-db
+            Dockerfile
+            
 
-### Important Notes
+
+##  Notes
 
 When we access to a normal page 
 
