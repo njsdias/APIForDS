@@ -79,3 +79,7 @@ Now inside of your project folder where you have the folders _web_ and _db_ as w
 
     sudo docker-compose build
     sudo docker-compose up
+
+For you see the functionality of your app you need to poen your webrowser and after each refresh you will see the number of users increasing:
+
+    localhost:5000/hello
