@@ -2,7 +2,12 @@
 
 - appV1: build an application to do the four elementary opperations: add, subtraction, division, multiply 
 
-- appV2: connect application to mongoDB server
+    -how we can send error messages to guide the user
+
+    - how we can pass a value to the API
+
+- appV2: it shows how connect the app to mongoDb server 
+          [readmeV2](APIFORDS/Tutorial2/README.md)
 
 - appV3
 
