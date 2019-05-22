@@ -294,17 +294,17 @@ In _find()_ method, if you pass multiple keys by separating them by ',' then Mon
           ]
         }).pretty()
  
- **2. OR in MongoDB**
+ **3. OR in MongoDB**
  
  You need to use _$or_ keyword.
  
          db.mycol.find({
-          $or:[
+           $or:[
             {
               "likes":{$gte:50}
             },
             {
               "title":"MongoDB Overview"
             }
-          ]
-        }).pretty()
+           ]
+          }).pretty()
