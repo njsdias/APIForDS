@@ -36,6 +36,46 @@ Now we need to build a communication among _web_ and _db_ in our app.py. For tha
 
       pymongo
       
-Now we need to build the project. In terminal run:
+Now we need to build the project because you did several modifications. In terminal run:
 
       sudo docker-compose build
+
+After build the project and check you don't have kind of errors duw to the last modifications you need to proceed with _app.py_ file in according to connect the application which is under development with the monogDB.
+
+    from flask import Flask, jsonify, request
+    from flask_restful import Api, Resource
+    import os
+
+    from pymongo import MongoClient
+
+    app = Flask(__name__)
+    api = Api(app)
+
+    #->> initialize a new client: 
+    # db is the name of the folder that have the Dockerfile of mongoDB
+    # default port used by mongoDB: 27017
+    client = MongoClient("mongodb://db:27017")
+    db = client.aNewDB                          # create a new DB named as aNewDB
+    UserNum = db["UserNum"]                     # create a collection
+
+    UserNum.insert({                            # inside of the collection we insert documments
+        'num_of_users':0
+    })
+
+    # Track the visits of our website
+    class Visit(Resource):
+        def get(self):                                               # here we are using GET and not POST
+            prev_num = UserNum.find({})[0]['num_of_users']           # to get the previous number of users
+            new_num = prev_num + 1
+            UserNum.update({}, {"$set":{"num_of_users":new_num}})    # update the number of users
+            return str("Hello user " + str(new_num))
+
+
+Inside of our APIs section we write, to define the root of our application:
+
+    api.add_resource(Visit, "/hello")
+    
+Now inside of your project folder where you have the folders _web_ and _db_ as well the _Dockerfile_ and _requirements.txt_ files, you need re _build_ and _up_ the project:
+
+    sudo docker-compose build
+    sudo docker-compose up
