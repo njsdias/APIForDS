@@ -116,6 +116,8 @@ Or simple copy and past in your terminal the next set of commands:
  
  ## First Commands in MongoDB
  
+ **1. Create and Delete Databases**
+ 
  - _use nameDB_ : Create an non-existence DB or use a existent DB
  
  - _db_ : To check your currently selected database
@@ -132,6 +134,96 @@ After you insert a document use _show dbs_ command to see your db in the list.
 
   - _db.dropDatabase()_ : To drop a exisiting database. If you have not selected any database, then it will delete default 'test' database.
   
-        use mydb                # use the DatabSe mydb
-        db.dropDatabase()       # drop the Dtabase mydb
+        use mydb                # use the Databse mydb
+        db.dropDatabase()       # drop the Database mydb
         show dbs                # check if the Database was dropped 
+        
+**2. Create and Drop a Collection**
+
+- _db.createCollection(name,options)
+
+- _name_ : it is the name of collection to be created
+
+- _options_ (this paramenter is optional): it is a document and is used to specify configuration of collection
+
+  - Capped (boolean) : when insert the new element it removes the oldest element, because capped collection is a fixed size collection that automatically overwrites its oldets entris when it reaches its amximum size.
+  
+  - autoIndexId (boolean) : If irue, automatically create index on id fields. default value is False
+  
+  - Size (number) : when the capped is true you need to scificies a maximum size in bytes for a capped collection
+  
+  - Max (number) : if the capped is true specifies the maximum number of documents allowed in the capped collection
+  
+        use test
+        db.createCollection("mycollection")
+        show collections
+        
+        db.createCollection("mycol", {
+          capped: true,
+          autoIndexId: true,
+          size: 6142800,
+          max : 10000
+          })
+    
+ **Note:** In MongoDB, you don't need to create collection. MongoDB creates collection automatically, when you insert some document.
+ 
+        # The next line creates a collection with a name magicalCollection
+        db.magicalCollection.insert({"name" : "magicalCollection"})     
+        show collections
+        
+- _db.CollectionName.drop()_ : it drops a the CollectionName from the database
+  
+        use mydb
+        show collections
+        db.mycollection.drop()
+        show collections
+        
+**3. Inserting Documents to Collections**
+
+- _db.CollectionName.insert(document)_ : you can use the _insert()_ or the _save()_ method to create a document
+    
+        db.mycol.insert({
+          _id: ObjectId(7df78ad8902c),
+          title: "MongoDB Overview",
+          description: "MongoDB is no sql database",
+          tags: ["mongodb", "database","NoSQL"],
+          likes: 100
+        })
+        
+ **Note:** To insert multiple documents ina a single query, you can passa an array of documents in _insert()_ command, like this:
+ 
+        db.mycol.insert([{},{},{},{}])     # you insert four empty documents
+    
+## Data Types MongoDB
+
+Some of datatypes supported by MongoDB:
+
+  - string : must be UTF-8 valid
+  
+  - integer : integer can be 32 bit or 64 bit depending upon your server
+  
+  - boolean : true / false
+  
+  - double : for store floating point values
+  
+  - min / max keys : used to compare a value against the lowest and highest BSON elements
+  
+  - arrays
+  
+  - timestamp - ctimestamp. This can be handy for recording when a document has been modified or added
+  
+  - object : thsi datatype is used for embedded documents
+  
+  - null : this type is used to store a null value
+  
+  - symbol : it's generally reserved for languages tha tuse a specific symbol type
+  
+  - date : to store the current date or time in UNIX time format. You can specify your own date time by creating object of Date and passing day, month, year into it.
+  
+  - object id : it is used to store the document's ID.
+  
+  - binary data : it is used to store binary data
+  
+  - code : it is to store JavaScript code into the document
+  
+  - regular expression : it is used to store regular expression
