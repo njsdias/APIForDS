@@ -11,6 +11,10 @@
 
 - appV3
 
+**Note:** 
+Modify the below line in Dockerfile with the name of app that you are using
+
+       CMD ["python", "appV1.py"]
 
 ## Dockers
 
