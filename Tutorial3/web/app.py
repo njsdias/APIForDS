@@ -105,6 +105,8 @@ class Store(Resource):
                 "status":301
             }
             return jsonify(retJson)
+
+
         
 
         #Step5 - store the sentence, tahe one token away and return 200 ok
@@ -149,6 +151,16 @@ class Get(Resource):
             }
             return jsonify(retJson)
 
+        #MAKE THE USER PAY!
+        users.update({
+            "Username":username
+        }, {
+            "$set":{
+                "Tokens":num_tokens-1
+                }
+        })
+
+
         #Take the password of the user
         sentence = users.find({
             "Username":username
@@ -156,7 +168,7 @@ class Get(Resource):
 
         retJson = {
             "status":200,
-            "sentence": sentence
+            "sentence": str(sentence)
         }
         return jsonify(retJson)
 
