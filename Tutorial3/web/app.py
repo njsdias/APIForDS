@@ -61,7 +61,7 @@ class Register(Resource):
 def verifyPW(usename, password):
     #Take the password of the user
     hashed_pw = users.find({
-        "Username":username,
+        "Username":username
     })[0]["Password"]
 
     #Verify the password of the user
@@ -74,7 +74,7 @@ def verifyPW(usename, password):
 def countTokens(username):
     #Take how many tokens have the user
     tokens = users.find({
-        "Username":username,
+        "Username":username
     })[0]["Tokens"]
     return tokens
 
@@ -117,18 +117,55 @@ class Store(Resource):
                     }
             })
             retJson = {
-                "status":200
+                "status":200,
                 "Message": "Save successfully"
             }
             return jsonify(retJson)
         
     
+# Retrive sentences
+class Get(Resource):
+    def get(self):
+        #Step 1 is to get posted data by the user
+        postedData = request.get_json()
 
+        #Step2 - Read the data
+        username = postedData["username"]
+        password = postedData["password"]
 
+        #Step3 - verify the username and password match
+        correct_pw = verifyPW(username,password)
+        if not correct_pw:
+            retJson = {
+                "status":302
+            }
+            return jsonify(retJson)
 
-#Resouces section
+        #Step4 - verify user has enough tokens
+        num_tokens = countTokens(username)
+        if num_tokens <= 0:
+            retJson = {
+                "status":301
+            }
+            return jsonify(retJson)
+
+        #Take the password of the user
+        sentence = users.find({
+            "Username":username
+        })[0]["Sentence"]
+
+        retJson = {
+            "status":200,
+            "sentence": sentence
+        }
+        return jsonify(retJson)
+
+            
+
+#Resources section
 api.add_resource(Register, "/register")
 api.add_resource(Store, "/store")
+api.add_resource(Get, "/retrieve")
 
 if __name__=="__main__":
     app.run(host='0.0.0.0')
