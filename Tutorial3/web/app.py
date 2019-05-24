@@ -1,3 +1,116 @@
+"""
+Registration of a auser 0 tokens
+Each user gets a credit of 10 tokens
+Store a sentence on yout databse for 1 token
+Retrieve his stored sentence on our databse for 1 token
+"""
+
+from flask import Flask, jsonify, request
+from flask_restful import Api, Resource
+from pymongo import MongoClient
+import bcrypt
+
+app = Flask(__name__)
+api = Api(app)
+
+client = MongoClient("mongodb://db:27017")
+db = client.SentencesDatabase
+users = db["Users"]
+
+
+postedData = request.get_json()
+
+class Register(Resource):
+    def post(self):
+        #Step 1 is to get posted data by the user
+        postedData = request.get_json()
+
+        #Get the data
+        username = postedData["username"]
+        password = postedData["password"]  #for security reasons we dont store passwords in our databases
+
+    
+        # For passwords we are generating a hash code.
+        # If you know the password we can genetating a hash code.
+        # If you know the hash we can not generate or know the password associate on it.
+        # So, when the user give us the same password the same hash will be generated and we will compare the hash and not the password.
+        # So, we store the hash inside of database.
+        # To generate a hash code we will use the library Py-BCRYPT
+        # sudo apt install python-pip ->if you don't have the pip installed 
+        # pip install bcrypt
+        # On requirements.txt file stored in web folder we need add bcrypt to install in our container
+
+        hashed_pw = bcrypt.hashpw(password, bcrypt.gensalt())
+
+        #Store username and pw into the database
+        users.insert({
+            "Username": username,
+            "Password": hashed_pw,
+            "Sentences":"",            #iniitialize with an empty sentence
+            "Tokens":10
+        })
+
+        retJson = {
+            "status": 200
+            "msg": "You successfully signed up for the API"
+        }
+        return jsonify(retJson)
+
+# Store sentences
+class Store(Resource):
+    def post(self):
+        #Step 1 is to get posted data by the user
+        postedData = request.get_json()
+
+        #Step2 - Read the data
+        username = postedData["username"]
+        password = postedData["password"]
+        sentence = postedData["sentence"]
+
+        #Step3 - verify the username and password match
+        correct_pw = verifyPW(username,password)
+        if not correct_pw:
+            retJson = {
+                "status":302
+            }
+            return jsonify(retJson)
+        
+        #Step4 - verify user has enough tokens
+        num_tokens = countTokens(username)
+        if num_tokens <= 0:
+            retJson = {
+                "status":301
+            }
+            return jsonify(retJson)
+        
+
+        #Step5 - store the sentence, tahe one token away and return 200 ok
+        user.update({
+            "Username":username
+            }, {
+                "$set":{
+                    "Sentence":sentence,
+                    "Tokens":num_tokens-1
+                    }
+            })
+            retJson = {
+                "status":200
+                "Message": "Save successfully"
+            }
+            return jsonify(retJson)
+        
+    
+
+
+
+#Resouces section
+api.add_resource(Register, "/register")
+api.add_resource(Store, "/store")
+
+if __name__=="__main__":
+    app.run(host='0.0.0.0')
+
+"""
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
 import os
