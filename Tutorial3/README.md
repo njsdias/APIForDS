@@ -28,7 +28,7 @@ Some explanations.
 
 - For retrieve sentence the situation is the same as the "store sentence"
 
-![chart_api](https://user-images.githubusercontent.com/37953610/58331639-7c92bf00-7e31-11e9-8609-900961f28d64.JPG)
+![chart_api](https://user-images.githubusercontent.com/37953610/58341475-35fb8f80-7e46-11e9-848e-c8ed09f294c4.JPG)
 
 For register users we can add additional status code:
 
@@ -47,7 +47,7 @@ For register users we can add additional status code:
    To generate a hash code we will use the library Py-BCRYPT
    
            sudo apt install python-pip ->if you don't have the pip installed 
-            pip install bcrypt
+           pip install bcrypt
   
    On requirements.txt file stored in web folder we need add bcrypt to install in our container.
    
@@ -81,6 +81,16 @@ Open the postman and select POST
                 "password": "123xyz",
                 "sentence": "This is my first sentence"
             }
-     - click in Send blue bottom and check if you receive the message: "Sentence saved successfully"         
+     - click in Send blue bottom and check if you receive the message: "Sentence saved successfully"   
+     
+ - To test the Get 
+    - write: localhost:5000/get
+    - select raw and JSON(application/json) and write:
+    
+           {
+                "username": "User1",
+                "password": "123xyz"
+            }
+     - click in Send blue bottom and check if you receive the message: "This is my first sentence" which is already stored in your MongoDB    
         
 
