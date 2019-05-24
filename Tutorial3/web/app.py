@@ -40,7 +40,7 @@ class Register(Resource):
         # pip install bcrypt
         # On requirements.txt file stored in web folder we need add bcrypt to install in our container
 
-        hashed_pw = bcrypt.hashpw(password, bcrypt.gensalt())
+        hashed_pw = bcrypt.hashpw(password.encode("utf8"), bcrypt.gensalt())
 
         #Store username and pw into the database
         users.insert({
@@ -55,6 +55,36 @@ class Register(Resource):
             "msg": "You successfully signed up for the API"
         }
         return jsonify(retJson)
+
+
+# Here we are define two functions that will be used inside of the classe Store
+def verifyPW(usename, password):
+    #Take the password of the user
+    hashed_pw = users.find({
+        "Username":username,
+    })[0]["Password"]
+
+    #Verify the password of the user
+    if bcrypt.hashpw(password.encode("utf8"),hashed_pw) == hashed_pw:
+        return True
+    else:
+        return False
+
+        
+def countTokens(username):
+    #Take how many tokens have the user
+    tokens = users.find({
+        "Username":username,
+    })[0]["Tokens"]
+    return tokens
+
+
+
+
+
+
+
+
 
 # Store sentences
 class Store(Resource):
