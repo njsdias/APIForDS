@@ -118,14 +118,14 @@ class Store(Resource):
             })
             retJson = {
                 "status":200,
-                "Message": "Save successfully"
+                "Message": "Saved successfully"
             }
             return jsonify(retJson)
         
     
 # Retrive sentences
 class Get(Resource):
-    def get(self):
+    def post(self):
         #Step 1 is to get posted data by the user
         postedData = request.get_json()
 
