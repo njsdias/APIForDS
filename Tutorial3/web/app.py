@@ -165,7 +165,7 @@ class Get(Resource):
 #Resources section
 api.add_resource(Register, "/register")
 api.add_resource(Store, "/store")
-api.add_resource(Get, "/retrieve")
+api.add_resource(Get, "/get")
 
 if __name__=="__main__":
     app.run(host='0.0.0.0')
