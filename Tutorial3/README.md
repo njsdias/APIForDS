@@ -50,3 +50,37 @@ For register users we can add additional status code:
             pip install bcrypt
   
    On requirements.txt file stored in web folder we need add bcrypt to install in our container.
+   
+   
+## Test the API
+Save your files: requirements.txt and app.py.
+
+In terminal write:
+
+        sudo docker-compose build
+        sudo docker-compose up
+
+Open the postman and select POST
+
+- To test the Register 
+    - write: localhost:5000/register
+    - select raw and JSON(application/json) and write:
+    
+            {
+                "username": "User1",
+                "password": "123xyz"
+            }    
+    - click in Send blue bottom and check if you receive the message: "You successfully signed up for API"
+    
+- To test the Store 
+    - write: localhost:5000/store
+    - select raw and JSON(application/json) and write:
+    
+           {
+                "username": "User1",
+                "password": "123xyz",
+                "sentence": "This is my first sentence"
+            }
+     - click in Send blue bottom and check if you receive the message: "Sentence saved successfully"         
+        
+
