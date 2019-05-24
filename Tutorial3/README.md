@@ -91,6 +91,6 @@ Open the postman and select POST
                 "username": "User1",
                 "password": "123xyz"
             }
-     - click in Send blue bottom and check if you receive the message: "This is my first sentence" which is already stored in your MongoDB    
+     - click in Send blue bottom and check if you receive the message: "This is my first sentence" which is already stored in your MongoDB. If you click more than 10 times in send button you will receive the message: "status 301" which represents the out of tokens.   
         
 
