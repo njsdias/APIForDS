@@ -79,13 +79,6 @@ def countTokens(username):
     return tokens
 
 
-
-
-
-
-
-
-
 # Store sentences
 class Store(Resource):
     def post(self):
