@@ -29,3 +29,16 @@ Some explanations.
 - For retrieve sentence the situation is the same as the "store sentence"
 
 ![chart_api](https://user-images.githubusercontent.com/37953610/58331639-7c92bf00-7e31-11e9-8609-900961f28d64.JPG)
+
+## Additional information
+   For passwords we are generating a hash code.
+   If you know the password we can genetating a hash code.
+   If you know the hash we can not generate or know the password associate on it.
+   So, when the user give us the same password the same hash will be generated and we will compare the hash and not the password.
+   So, we store the hash inside of database.
+   To generate a hash code we will use the library Py-BCRYPT
+   
+           sudo apt install python-pip ->if you don't have the pip installed 
+            pip install bcrypt
+  
+   On requirements.txt file stored in web folder we need add bcrypt to install in our container.
