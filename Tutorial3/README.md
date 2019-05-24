@@ -30,6 +30,14 @@ Some explanations.
 
 ![chart_api](https://user-images.githubusercontent.com/37953610/58331639-7c92bf00-7e31-11e9-8609-900961f28d64.JPG)
 
+For register users we can add additional status code:
+
+- when the user don't give the username
+
+- when user don't give the password
+
+- when the user try to sign in with and user that already exists in our database
+
 ## Additional information
    For passwords we are generating a hash code.
    If you know the password we can genetating a hash code.
