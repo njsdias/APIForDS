@@ -16,7 +16,7 @@ users = db["Users"]        # create a new collection
 
 
 def UserExist(username):
-    if user.find({"Username": username}).count() == 0:
+    if users.find({"Username": username}).count() == 0:
         return False
     else:
         return True
