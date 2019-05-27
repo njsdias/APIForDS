@@ -15,7 +15,7 @@ users = db["Users"]        # create a new collection
 
 
 
-def UerExist(username):
+def UserExist(username):
     if user.find({"Username": username}).count() == 0:
         return False
     else:
@@ -45,7 +45,7 @@ def countTokens(username):
     
     
 
-class register(Resource):
+class Register(Resource):
     def post(self):
         postedData = request.get_json()     # get information from mongoDB
 
@@ -76,7 +76,7 @@ class register(Resource):
         }
         return jsonify(retJson)
 
-class register(Resource):
+class Detect(Resource):
     def post(self):
         postedData = request.get_json()     # get information from mongoDB
 
@@ -84,7 +84,6 @@ class register(Resource):
         password = postedData["password"]   # take password
         text1 = postedData["text1"]         # take the first string text
         text2 = postedData["text2"]         # take the second string text
-
 
         # Verify the user existence
         if not UserExist(username):
@@ -115,7 +114,7 @@ class register(Resource):
             }
             return jsonify(retJson)
 
-        # Calculate the edit distance
+        # Calculate the edit distance between text1, text2
         nlp = scpay.load('en_core_web_sm')
 
         text1 = nlp(text1)
@@ -123,7 +122,6 @@ class register(Resource):
 
         # Compare the two texts by evaluate the ratio. Closest to 1 more similare are the two files
         ratio = text1.similarity(text2)
-
         retJson = {
             "status": 200,
             "similarity": ratio,
@@ -133,7 +131,6 @@ class register(Resource):
 
         # After compare texts we need subtract one token from the user
         current_tokens = countTokens(username)
-
         users.update({
             "Username": username,
         },{
@@ -168,7 +165,7 @@ class Refill(Resource):
             }
             return jsonify(retJson)
 
-        current_tokens = countTokens(username)
+        #Make the refill
         users.update({
             "Username": username
         },{
@@ -178,7 +175,7 @@ class Refill(Resource):
         })
 
         retJson = {
-            "status": 304
+            "status": 200
             "msg": "Refilled successfully"
         }
         return jsonify(retJson)
