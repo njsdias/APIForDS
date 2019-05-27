@@ -1,6 +1,15 @@
-### Build an API for check the Similarity between two texts - DS API
+### Build an API for Image Recognition - DS API
 
-Resources:
+This API uses Machine Learning for Image Recognition using TensorFlow using a trained model named as Inceptionv3.
+The user sends the image to the API and the Machine Learning classifies the image as:
+
+- Person
+- Vegetable
+- Famouse Person
+- Animal
+- Transport: cars, airplane, trains, etc.
+
+**Resources**
 
 - Register a new user
 
@@ -11,11 +20,11 @@ Resources:
       - 200 ok
       - 301 invalid username
 
-- Detect similarity between two docs: Take off one token for each time always the user checks the similarity between two texts.
+- Classify: root for classify the image
 
     - URL: /detect
     - Method: POST
-    - Parameters : username , password, text1, text2
+    - Parameters : username , password, image url (image from the internet)
     - status codes: 
       - 200 ok : return the similarity between two documents
       - 301 invalid username
@@ -32,6 +41,8 @@ Resources:
       - 301 invalid username
       - 304 invalid admin password
     
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *    
+
 ## Building a Docker Compose from scratch
     
 Inside of the main folder (i.e Tutorial4) run the below commands
