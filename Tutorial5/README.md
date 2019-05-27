@@ -60,11 +60,18 @@ Inside of folder \Tutorial4\web create a new file:
     touch requirements.txt   
     touch Dockerfile
         
-Since we need to compare the text among two documents we will use spacy python library. Spacy have your own moddels and it use a model already trained for NLP: en-core_web_sm-2.0.0.tar.gz. The website for download the model can be found searching in web by: spacy download models, or download it directly from github: 
+**Tensorflow**
+For to classify the image using inceptionv3 we to create a new file with the name _classify_image.py_ with the contect that you will find in the Tensorflow repo:
+    
+    https://github.com/tensorflow/models/blob/master/tutorials/image/imagenet/classify_image.py
+   
+Inside of this file we need to find the localization of the model. And download the model from there (84.8 MB):
 
-    https://github/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz
+    DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
 
-After downloaded the previous file put it on folder /web .
+Now you need to modify this path by the path where you save the file, i.e. :
+
+    DATA_URL = 'Desktop'
 
 **NOTE**: We prefere do not install spacy models from pip install because the server can breack any point , and for that we can prefere have the models locally available.
 
