@@ -11,7 +11,7 @@ Resources:
       - 200 ok
       - 301 invalid username
 
-- Detect similarity between two docs: Discount one token for each time the user checks the similarity between two texts.
+- Detect similarity between two docs: Take off one token for each time always the user checks the similarity between two texts.
 
     - URL: /detect
     - Method: POST
