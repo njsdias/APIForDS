@@ -57,6 +57,50 @@ After downloaded the previous file put it on folder /web .
 
 **NOTE**: We prefere do not install spacy models from pip install because the server can breack any point , and for that we can prefere have the models locally available.
 
+**To Run**: In the mail foler (TextSimilarity/) run:
 
+    sudo docker-compose build
+    sudo docker compose up
 
+**Postman**: To test the API go to Postman
 
+- Register: Select POST
+
+       localhost:5000/register
+
+select raw and JSON(application/json) and write:
+
+    {
+      "username": "User1",
+      "password": "123",
+    }
+click in SEND blue bottom and check if you receive the message: "Sentence saved successfully"
+
+- Detect: Select POST
+
+        localhost:5000/detect
+    
+select raw and JSON(application/json) and write:
+
+    {
+      "username": "User1",
+      "password": "123",
+      "text1": "This is a cute dog",
+      "test2": "Wow. The dog is so cute!"
+    }
+   
+click in Send blue bottom and check if you receive similarity ratio. if you send it for more six times you will get the satus error message: "Not enough tokens. Please,refill!!"
+
+- Refill: Select POST
+
+       localhost:5000/refill
+
+select raw and JSON(application/json) and write:
+
+    {
+      "username": "User1",
+      "password": "abc123",
+      "refill": 4
+    }
+
+We can check if you can get similarity for four more time. Click in SEND blue bottom and check if you receive the message: "Sentence saved successfully" following the procedure _Detect_.
