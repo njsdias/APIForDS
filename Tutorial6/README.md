@@ -1,13 +1,7 @@
-### Build an API for Image Recognition - DS API
+### Building a Bank API 
 
-This API uses Machine Learning for Image Recognition using TensorFlow using a trained model named as Inceptionv3.
-The user sends the image to the API and the Machine Learning classifies the image as:
+Suppose a Bank which have a safe-deposit box with a lot of money and you open different accounts in this Bank. Now we make a deposit in one bank account and you do money transfer between accounts. You can take a loan from the Bank. In this sense it will increase your cash as well your debit. Our API want to ensure the transactions between the accounts are corrected and is no problem.
 
-- Person
-- Vegetable
-- Famouse Person
-- Animal
-- Transport: cars, airplane, trains, etc.
 
 **Resources**
 
@@ -19,27 +13,63 @@ The user sends the image to the API and the Machine Learning classifies the imag
     - status codes: 
       - 200 ok
       - 301 invalid username
+      - 302 invalid password
 
-- Classify: root for classify the image
+- Add: allows you to add money to bank account
 
-    - URL: /detect
+    - URL: /add
     - Method: POST
-    - Parameters : username , password, image url (image from the internet)
+    - Parameters : username , password, amount
     - status codes: 
       - 200 ok : return the similarity between two documents
       - 301 invalid username
       - 302 invalid password
-      - 303 out of tokens
+      - 304 negative amount
 
-- Refill : allows the admin of the site to add tokens to the users
+- Transfer : transfer money between accounts
 
-    - URL: /refill
+    - URL: /transfer
     - Method: POST
-    - Parameters : username , adm_pw, refill_amount
+    - Parameters : username , password, to, amount
     - status codes: 
       - 200 ok
       - 301 invalid username
-      - 304 invalid admin password
+      - 302 invalid password
+      - 303 not enough money
+      - 304 negative amount
+
+- CheckBalance : 
+
+    - URL: /balance
+    - Method: POST
+    - Parameters : username , password
+    - status codes: 
+      - 200 ok
+      - 301 invalid username
+      - 302 invalid password
+      
+- Takeloan : 
+
+    - URL: /takeloan
+    - Method: POST
+    - Parameters : username , password, amount
+    - status codes: 
+      - 200 ok
+      - 301 invalid username
+      - 302 invalid password
+      - 304 negative amount
+ 
+- Payloan : 
+
+    - URL: /payloan
+    - Method: POST
+    - Parameters : username , password, amount
+    - status codes: 
+      - 200 ok
+      - 301 invalid username
+      - 302 invalid password
+      - 303 not enough money
+      - 304 negative amount
     
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *    
 
@@ -81,7 +111,7 @@ Inside of this file we need to find the localization of the model. And download 
 
 **Postman**: To test the API go to Postman
 
-Here we can do a little diferent as usual a we write all entries for all roots (register, classify and register) and we will select one of them to see what happens. For each root only the fields that the root is expected are automatically read.
+Here we can do a little diferent as usual. We write all entries for all roots (register, classify and register) and we will select one of them to see what happens. For each root only the fields that the root is expected are automatically read.
 
 Now, select Body with option raw and JSON(application/json) and write:
 
