@@ -108,7 +108,6 @@ After click on Send blue bottom you will receive the _"msg": "Successfully regis
     
 Click on Send blue bottom and wait a moment until the result appears:
 
-![class_result](https://user-images.githubusercontent.com/37953610/58471452-d2ba7780-813b-11e9-8365-5840d4d0ee20.jpg)
 
 We can see from the result the category with higher probability is zebra. So, it is what we expected the model do.
    
