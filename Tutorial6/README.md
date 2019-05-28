@@ -75,30 +75,16 @@ Suppose a Bank which have a safe-deposit box with a lot of money and you open di
 
 ## Building a Docker Compose from scratch
     
-Inside of the main folder (i.e Tutorial4) run the below commands
+Inside of the main folder (i.e BankAPI) run the below commands
     
     touch docker-compose.yml
     mkdir web                            # where we develop our API
     mkdir db                             # to store in mongDB informations about the users among of them username and passwords
-        
-Inside of folder \Tutorial4\db create a new file:
+    touch web/Dockerfile
+    touch web/app.py
+    touch web/requirements.txt
+    touch db/DockerFile
    
-    touch Dockerfile
-   
-Inside of folder \Tutorial4\web create a new file:
-
-    touch requirements.txt   
-    touch Dockerfile
-        
-**Tensorflow**
-For to classify the image using inceptionv3 we to create a new file with the name _classify_image.py_ with the contect that you will find in the Tensorflow repo:
-    
-    https://github.com/tensorflow/models/blob/master/tutorials/image/imagenet/classify_image.py
-   
-Inside of this file we need to find the localization of the model. And download the model from there (84.8 MB):
-
-    DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
-
 
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
