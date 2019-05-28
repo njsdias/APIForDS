@@ -49,7 +49,7 @@ def verifyCredentials(username, password):
     if not UserExists(username):
         return generateReturnDictionary(301,"Invalid Username"), True
 
-    correct_pw = verify_pw(username,password)
+    correct_pw = verifyPw(username,password)
     if not correct_pw:
         return generateReturnDictionary(302,"Invalid Password"), True
 
