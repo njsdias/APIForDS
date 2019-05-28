@@ -88,9 +88,9 @@ Inside of the main folder (i.e BankAPI) run the below commands
 
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-## Test the API
+## Test the BANK API
 
-**To Run**: In the mail foler (TextSimilarity/) run:
+**To Run**: In the mail foler (BankAPI/) run:
 
     sudo docker-compose build
     sudo docker compose up
@@ -115,23 +115,108 @@ Now we can select each root.
 - First test Register and for that select POST, and write:
 
        localhost:5000/register
-
-After click on Send blue bottom you will receive the _"msg": "Successfully registration"_
-
-- Now teste the Classify. Select POST and write:
-
-        localhost:5000/classify
-    
-Click on Send blue bottom and wait a moment until the result appears:
-
-
-We can see from the result the category with higher probability is zebra. So, it is what we expected the model do.
-   
-
-- For last test Refill. 
-
-For that we need run classify more six times until receive the message _"Not enough tokens"_. After that select POST, and write:
-
-       localhost:5000/refill
        
-Now we add more 2 credits for the user and you after three using _/classify_ you will get the same message: _"Not enough tokens"_  .
+Now, select Body with option raw and JSON(application/json) and register BANK:
+
+    {
+      "username": "BANK",
+      "password": "secure"
+    }
+
+After click on Send blue bottom you will receive the status 200.
+
+Register user1 and user2:
+
+    {
+      "username": "user1",
+      "password": "secure"
+    }
+    
+    {
+      "username": "user2",
+      "password": "secure"
+    }
+
+If you try register the same user twice you will receive a status error 301.
+
+- Balance of the Bank. Select POST and write:
+
+        localhost:5000/balance
+    
+Click on Send blue bottom and you will see the bank don't have already Debt and Own:
+
+    {
+      "Debt": 0,
+      "Own": 0,
+      "Username": "BANK"
+    }
+
+- Add. Select POST and write:
+
+        localhost:5000/add
+        
+Add money to user1:
+
+    {
+      "username": "user1",
+      "password": "secure",
+      "amount": 100
+    }     
+    
+After click on Send blue bottom you will receive the status 200.       
+
+- Balance of the user1. Select POST and write:
+
+        localhost:5000/balance
+        
+Click on Send blue bottom and you will see the bank don't have already Debt and Own:
+
+    {
+      "Debt": 0,
+      "Own": 99,
+      "Username": "user1"
+    }
+    
+ Because the Bank take 1 from the user. You can now check the balance of the Bank and you will see
+ 
+     {
+      "Debt": 0,
+      "Own": 1,
+      "Username": "BANK"
+    }
+
+- Transfer. The user1 transfer money to user2. Select POST and write:
+
+        localhost:5000/transfer
+        
+Now, select Body with option raw and JSON(application/json) and register BANK:
+
+    {
+      "username": "user1",
+      "password": "secure",
+      "to": "user2",
+      "amount": 20
+    }
+Click on Send blue bottom and you will see the status 200.     
+    
+- Balance. Check the balance of the user2. Select POST and write:
+
+        localhost:5000/balance
+  
+Now, select Body with option raw and JSON(application/json) and register BANK:
+
+    {
+      "username": "user2",
+      "password": "secure",
+    }
+Click on Send blue bottom and you will see:
+
+    {
+      "Debt": 0,
+      "Own": 19
+      "Username":"user2"
+    }
+
+Since the bank takes 1 from the transfer the user2 only has 19.
+
+Check the TakeLoan and PayLoan and after that check the balance to see differences.
