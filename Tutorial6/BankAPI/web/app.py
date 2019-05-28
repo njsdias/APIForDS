@@ -2,16 +2,14 @@ from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
 from pymongo import MongoClient
 import bcrypt
-import requests                        #to get the hrl that the users sends
-import subprocess
-import json
 
-
+# initialize the application
 app = Flask(__name__)
 api = Api(app)
 
+# connect to mongoDb to database
 client = MongoClient("mongodb://db:27017")
-db = client.ImageRecognition          # create a new Database
+db = client.BankAPI                   # create a new Database
 users = db["Users"]                   # create a new collection
 
 
@@ -49,13 +47,46 @@ def verifyCredentials(username, password):
     if not UserExists(username):
         return generateReturnDictionary(301,"Invalid Username"), True
 
-    correct_pw = verify_pw(username,password)
+    correct_pw = verifyPw(username,password)
     if not correct_pw:
         return generateReturnDictionary(302,"Invalid Password"), True
 
     return None, False
-    
-    
+
+def cashWithUser(username):
+    cash = users.find({
+        "Username": username
+    })[0]["Own"]
+    return cash
+
+def debtWithUser(username):
+    debt = users.find({
+        "Username": username
+    })[0]["Debt"]
+    return debt
+   
+
+def updateAccount(username,balance):
+    users.update({
+        "Username": username
+    },{
+        "$set": {
+            "Own":balance
+        }
+    })
+
+
+def updateDebt(username,balance):
+    users.update({
+        "Username": username
+    },{
+        "$set": {
+            "Debt": balance
+        }
+    })
+
+
+
 #---->>>> Class Section   
 class Register(Resource):
     def post(self):
@@ -75,11 +106,12 @@ class Register(Resource):
         # Encrypt password
         hashed_pw = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
 
-        # Input in mongoDB the username, the password and the credits for tokens
+        # Store in mongoDB the username, the password and the credits for tokens
         users.insert({
             "Username": username,
             "Password": hashed_pw,
-            "Tokens": 6
+            "Own": 0,                   #how much money the user have
+            "Debt": 0
         })
         
         retJson = {
@@ -89,97 +121,141 @@ class Register(Resource):
         return jsonify(retJson)
 
 
-class Classify(Resource):
+class Add(Resource):
     def post(self):
         postedData = request.get_json()     # get information from mongoDB
 
         username = postedData["username"]   # take username
         password = postedData["password"]   # take password
-        url = postedData["url"]              # take url
+        money = postedData["amount"]        # take amount
 
         
         retJson, error = verifyCredentials(username, password)
+
         if error
             return jsonify(retJson)
-    
-        # Verify the number of tokens
-        num_tokens = countTokens(username)
-
-        tokens = users.find({
-            "Username":username
-        })[0]["Tokens"]
-
-        if tokens <= 0:
-            return jsonify(generateReturnDictionary(303,"Not Enought Tokens!"))
-
         
-        r = requests.get(url)   # Get the Image from URL
-        retJson = {}
-        # Put the URL image in the file temp.jpg
-        with open("temp.jpg","wb") as f:
-            f.write(r.content)
-            proc = subprocess.Popen('python classify_image.py --model_dir=. --image_file=./temp.jpg')
-            proc.communicate()[0]
-            proc.wait()
-            with open("text.txt") as g:   # the end results will be saved in text.txt and it 
-                retJson = json.load(g)    # will be downloaded as a json file
+        if money <= 0:
+            return jsonify(generateReturnDictionary(304,"The money entered must be >0."))
 
-        # we need modify our classify_image.py to turn it available to save the results in json format.
-        # Below are the code modified and you to do this chances in your classify_image.py 
-        """
-        top_k = predictions.argsort()[-FLAGS.num_top_predictions:][::-1]
-        retJson = {}
-        for node_id in top_k:
-          human_string = node_lookup.id_to_string(node_id)
-          score = predictions[node_id]
-          retJson[human_string] = score
-          print('%s (score = %.5f)' % (human_string, score))
-        with open("text.txt") as f:
-          json.dump(retJson, f)
-        """
+        #if money is greater >0
+        cash = cashWithUser(username)               # this is the cash that user have 
+        money -= 1                                  # for each transaction take 1 from user
+        bank_cash = cashWithUser("BANK")            # verify the money in the BANK
+        updateAccount("BANK", bank_cash + 1 )       # update account of the BANK adding 1 of the user
+        updateAccount(username, cash + money )      # update user's account subtracting 1 
 
-        users.update({
-            "Username": username,
-        },{
-           "$set":{
-               "Tokens": tokens - 1
-           }
-        })
+        return jsonify(generateReturnDictionary(200,"amount added successfully to account."))
 
-        return jsonify(retJson)
-        
-class Refill(Resource):
+class Transfer(Resource):
     def post(self):
-        postedData = request.get_json()        # get information from mongoDB
+        postedData = request.get_json()     # get information from mongoDB
 
-        username = postedData["username"]      # take username
-        password = postedData["admin_pw"]      # take password
-        amount = postedData["amount"]   # take refill
+        username = postedData["username"]   # take username
+        password = postedData["password"]   # take password
+        to       = postedData["to"]
+        money    = postedData["amount"]     # take amount
 
-        if not UserExists(username):
-            return jsonify(generateReturnDictionary(301,"Invalid Username"))
+        retJson, error = verifyCredentials(username, password)
 
-        correct_pw = 'abc123' # Only for demostration. The recommendation is store the pass inside of mongoDb as we do for the user
-        if not password == correct_pw:
-            return jsonify(generateReturnDictionary(304,"Invalid Admin password"))
+        if error:
+            return jsonify(retJson)
 
-       
-        users.update({
+        cash = cashWithUser(username)
+        if cash <= 0:
+            return jsonify(generateReturnDictionary(304,"You are out of the money, please add or take a loan."))
+
+        if not USerExist(to):
+            return jsonify(generateReturnDictionary(301,"Receiver username is invalid."))
+
+        cash_from = cashWithUser(username)
+        cash_to   = cashWithUser(to)
+        bank_cash = cashWithUSer("BANK")
+
+        updateAccount("BANK", bank_cash +1)
+        updateAccount(to, cash_to + money -1)
+        updateAccount(username, cash_from - money)
+
+        return jsonify(generateReturnDictionary(200,"Amount transfer successfully."))
+        
+
+class Balance(Resource):
+    def post(self):
+        postedData = request.get_json()     # get information from mongoDB
+
+        username = postedData["username"]   # take username
+        password = postedData["password"]   # take password
+
+        retJson, error = verifyCredentials(username, password)
+
+        if error:
+            return jsonify(retJson)
+
+        #Using projection in JSON
+        retJson = users.find({
             "Username": username
         },{
-            "$set":{
-                "Tokens": amount
-            }
-        })
+            "Password":0,                 # I don't see the password
+            "_id": 0                      # I don't see the password 
+        })[0]                             # Display all rest information of the user
+        
+        return jsonify(retJson)
+
+class TakeLoan(Resource):
+    def post(self):
+        postedData = request.get_json()     # get information from mongoDB
+
+        username = postedData["username"]   # take username
+        password = postedData["password"]   # take password
+        money    = postedData["amount"]   
+
+        retJson, error = verifyCredentials(username, password)
+        
+        if error:
+            return jsonify(retJson)
+
+        cash   = cashWithUser(username)
+        debt   = debtWithUser(username)
+        updateAccount(username, cash+money)
+        updateDebt(username, debt+money) 
+
+        return jsonify(generateReturnDictionary(200,"Loan added to your account"))
 
 
-        return jsonify(generateReturnDictionary(200,"Refilled Successfully"))
+class PayLoan(Resource):
+    def post(self):
+        postedData = request.get_json()     # get information from mongoDB
+
+        username = postedData["username"]   # take username
+        password = postedData["password"]   # take password
+        money    = postedData["amount"]   
+
+        retJson, error = verifyCredentials(username, password)
+        
+        if error:
+            return jsonify(retJson)
+
+        cash   = cashWithUser(username)
+
+        if cash < money:
+            return jsonify(generateReturnDictionary(303,"Not enough cash in your account."))
+        
+        debt   = debtWithUser(username)
+
+        updateAccount(username, cash - money)
+        updateDebt(username, debt - money) 
+
+        return jsonify(generateReturnDictionary(200,"You've successfully paid your loan."))
 
 
 #Api section
 api.add_resource(Register,'/register')
-api.add_resource(Detect,'/classify')
-api.add_resource(Refill,'/refill')
+api.add_resource(Add,'/add')
+api.add_resource(Transfer,'/transfer')
+api.add_resource(Balance,'/balance')
+api.add_resource(TakeLoan,'/takeloan')
+api.add_resource(PayLoan,'/payloan')
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
