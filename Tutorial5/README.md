@@ -69,11 +69,10 @@ Inside of this file we need to find the localization of the model. And download 
 
     DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
 
-Now you need to modify this path by the path where you save the file, i.e. :
 
-    DATA_URL = 'Desktop'
 
-**NOTE**: We prefere do not install spacy models from pip install because the server can breack any point , and for that we can prefere have the models locally available.
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+## Test the API
 
 **To Run**: In the mail foler (TextSimilarity/) run:
 
@@ -89,14 +88,16 @@ Now you need to modify this path by the path where you save the file, i.e. :
 select raw and JSON(application/json) and write:
 
     {
-      "username": "User1",
-      "password": "123",
+      "username": "test",
+      "password": "secure",
+      "url":
+      "amount"
     }
 click in SEND blue bottom and check if you receive the message: "Sentence saved successfully"
 
-- Detect: Select POST
+- Classify: Select POST
 
-        localhost:5000/detect
+        localhost:5000/classify
     
 select raw and JSON(application/json) and write:
 
