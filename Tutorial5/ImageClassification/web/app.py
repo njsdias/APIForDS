@@ -95,7 +95,7 @@ class Classify(Resource):
 
         username = postedData["username"]   # take username
         password = postedData["password"]   # take password
-        ur = postedData["url"]              # take url
+        url = postedData["url"]              # take url
 
         
         retJson, error = verifyCredentials(username, password)
