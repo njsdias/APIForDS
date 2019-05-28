@@ -2,6 +2,3 @@ Flask
 flask_restfull
 pymongo
 bcrypt
-numpy
-tensorflow
-requests
