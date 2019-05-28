@@ -81,45 +81,42 @@ Inside of this file we need to find the localization of the model. And download 
 
 **Postman**: To test the API go to Postman
 
-- Register: Select POST
+Here we can do a little diferent as usual a we write all entries for all roots (register, classify and register) and we will select one of them to see what happens. For each root only the fields that the root is expected are automatically read.
+
+Now, select Body with option raw and JSON(application/json) and write:
+
+    {
+      "username": "user1",
+      "password": "secure",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Zebra_standing_alone_crop.jpg/250px-Zebra_standing_alone_crop.jpg",
+      "amount": 2
+    }
+    
+For url adrress is only to search for a image in your web browser (for instance: zebra) and with right click select _Copy Image Address_.
+
+Now we can select each root. 
+
+- First test Register and for that select POST, and write:
 
        localhost:5000/register
 
-select raw and JSON(application/json) and write:
+After click on Send blue bottom you will receive the _"msg": "Successfully registration"_
 
-    {
-      "username": "test",
-      "password": "secure",
-      "url":
-      "amount"
-    }
-click in SEND blue bottom and check if you receive the message: "Sentence saved successfully"
-
-- Classify: Select POST
+- Now teste the Classify. Select POST and write:
 
         localhost:5000/classify
     
-select raw and JSON(application/json) and write:
+Click on Send blue bottom and wait a moment until the result appears:
 
-    {
-      "username": "User1",
-      "password": "123",
-      "text1": "This is a cute dog",
-      "test2": "Wow. The dog is so cute!"
-    }
+![class_result](https://user-images.githubusercontent.com/37953610/58471452-d2ba7780-813b-11e9-8365-5840d4d0ee20.jpg)
+
+We can see from the result the category with higher probability is zebra. So, it is what we expected the model do.
    
-click in Send blue bottom and check if you receive similarity ratio. if you send it for more six times you will get the satus error message: "Not enough tokens. Please,refill!!"
 
-- Refill: Select POST
+- For last test Refill. 
+
+For that we need run classify more six times until receive the message _"Not enough tokens"_. After that select POST, and write:
 
        localhost:5000/refill
-
-select raw and JSON(application/json) and write:
-
-    {
-      "username": "User1",
-      "password": "abc123",
-      "refill": 4
-    }
-
-We can check if you can get similarity for four more time. Click in SEND blue bottom and check if you receive the message: "Sentence saved successfully" following the procedure _Detect_.
+       
+Now we add more 2 credits for the user and you after three using _/classify_ you will get the same message: _"Not enough tokens"_  .
